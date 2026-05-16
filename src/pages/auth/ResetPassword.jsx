@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPassword = () => {
     const { id, token } = useParams();
-    const navigate = useNavigate();
+    const navigate = useNavigate();np
     const [formData, setFormdata] = useState({
         password: "",
 

@@ -5,6 +5,8 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/auth/Login';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import Home from './pages/buyer/Home';
+import ProductDetail from './pages/buyer/ProductDetail';
 
 const App = () => {
   return (
@@ -16,7 +18,8 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/forget-password' element={<ForgotPassword />} />
           <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
-          {/* <Route path='/reset-password' element={}  /> */}
+          <Route path="/" element={<Home />} />
+          <Route path='/productDetails/:id' element={<ProductDetail />} />
         </Routes>
       </BrowserRouter>
     </div>
