@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
-
     useEffect(() => {
         apicall();
     }, [])

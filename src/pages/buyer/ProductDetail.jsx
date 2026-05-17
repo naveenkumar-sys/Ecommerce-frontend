@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { MyCartContext } from "../../context/CartContext";
 const ProductDetail = () => {
     const [prod, setProd] = useState(null);
-
     const { id } = useParams();
+    const { cart, dispatch } = useContext(MyCartContext)
+
 
     useEffect(() => {
         apicall();
@@ -91,7 +92,7 @@ const ProductDetail = () => {
                     {/* Buttons */}
                     <div className="flex gap-5 mt-5">
 
-                        <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition" onClick={() => { dispatch({ type: "ADD", payload: prod }) }}>
                             Add To Cart
                         </button>
 
