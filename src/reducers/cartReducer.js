@@ -21,10 +21,14 @@ export const reducerFn = (cart, action) => {
       );
     }
     case "DECREASE": {
-      return cart.map((ele)=>{})
+      return cart.map((ele) =>
+        ele._id === action.payload._id && ele.quantity > 1
+          ? { ...ele, quantity: ele.quantity + 1 }
+          : ele,
+      );
     }
 
     default:
-      break;
+      return cart;
   }
 };
