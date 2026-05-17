@@ -7,10 +7,12 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import Home from './pages/buyer/Home';
 import ProductDetail from './pages/buyer/ProductDetail';
+import CartPage from './pages/buyer/CartPage';
+import CartContext from './context/CartContext';
 
 const App = () => {
   return (
-    <div>
+    <CartContext>
       <BrowserRouter>
         <Toaster />
         <Routes>
@@ -20,9 +22,10 @@ const App = () => {
           <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
           <Route path="/" element={<Home />} />
           <Route path='/productDetails/:id' element={<ProductDetail />} />
+          <Route path='/cart' element={<CartPage />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </CartContext>
   );
 };
 

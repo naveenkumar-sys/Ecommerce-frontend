@@ -45,6 +45,8 @@ const Home = () => {
                 })
             }
 
+            <h1 onClick={() => { navigate("/cart") }}>🛒</h1>
+
         </div>
     );
 };
