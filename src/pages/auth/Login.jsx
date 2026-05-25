@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { authContext } from '../../context/AuthProvider';
 
 const Login = () => {
-        const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { login } = useContext(authContext);
     const [formData, setFormdata] = useState({
         name: "",
         email: "",
@@ -12,6 +14,7 @@ const Login = () => {
         role: "buyer",
 
     })
+
 
     const handleChange = (e) => {
         setFormdata((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -25,11 +28,16 @@ const Login = () => {
             const response = await axios.post("http://localhost:5000/api/users/login", formData);
             // console.log(response.data.message);
             toast.success(response.data.message);
-            console.log(response.data);
+            // console.log(response.data.data);
             const token = response.data.token;
-            localStorage.setItem("token",token);
-            navigate("/");
-            // console.log(formData);
+            const user = response.data.data;
+            login(token, user);
+            
+            if (user.role === "seller") {
+                navigate("/create-product");
+            } else {
+                navigate("/");
+            }
 
         } catch (error) {
             console.log(error);
@@ -54,7 +62,7 @@ const Login = () => {
                     <button className='font-bold text-md bg-gray-800 text-white py-1 rounded-md w-full px-3 cursor-pointer hover:bg-gray-900'>Login</button>
                 </div>
                 <div className='w-full text-center'>
-                    <p>forget password? <span onClick={() => navigate("/forget-password")} className='hover:text-white cursor-pointer font-bold'>forget-password</span> </p>
+                    <p>new user? <span onClick={() => navigate("/register")} className='hover:text-white cursor-pointer font-bold'>Register</span> </p>
                 </div>
 
             </form>

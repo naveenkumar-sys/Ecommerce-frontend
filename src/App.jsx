@@ -9,12 +9,17 @@ import Home from './pages/buyer/Home';
 import ProductDetail from './pages/buyer/ProductDetail';
 import CartPage from './pages/buyer/CartPage';
 import CartContext from './context/CartContext';
+import Navbar from './components/layout/Navbar';
+import ProtectedRoute from './routes/ProtectedRoute';
+import SellerRoute from './routes/SellerRoute';
+import CreateProducts from './services/CreateProducts';
 
 const App = () => {
   return (
     <CartContext>
       <BrowserRouter>
         <Toaster />
+        <Navbar />
         <Routes>
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
@@ -23,6 +28,12 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path='/productDetails/:id' element={<ProductDetail />} />
           <Route path='/cart' element={<CartPage />} />
+          <Route path='/create-product' element={
+            <ProtectedRoute>
+              <SellerRoute>
+                <CreateProducts />
+              </SellerRoute>
+            </ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </CartContext>
